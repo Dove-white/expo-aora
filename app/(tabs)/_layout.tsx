@@ -4,6 +4,29 @@ import { icons } from "@/constants";
 import TabBarIcon from "@/components/navigation/TabBarIcon";
 
 const TapsLayout = () => {
+  const navList = [
+    {
+      name: "home",
+      title: "Home",
+      icon: icons.home,
+    },
+    {
+      name: "bookmark",
+      title: "Bookmark",
+      icon: icons.bookmark,
+    },
+    {
+      name: "create",
+      title: "Create",
+      icon: icons.plus,
+    },
+    {
+      name: "profile",
+      title: "Profile",
+      icon: icons.profile,
+    },
+  ];
+
   return (
     <Tabs
       screenOptions={{
@@ -18,69 +41,24 @@ const TapsLayout = () => {
         },
       }}
     >
-      <Tabs.Screen
-        name="home"
-        options={{
-          headerShown: false,
-          title: "Home",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name="home"
-              color={color}
-              focused={focused}
-              icon={icons.home}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="bookmark"
-        options={{
-          headerShown: false,
-          title: "Bookmark",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name="bookmark"
-              color={color}
-              focused={focused}
-              icon={icons.bookmark}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="create"
-        options={{
-          headerShown: false,
-          title: "Create",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name="create"
-              color={color}
-              focused={focused}
-              icon={icons.plus}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="profile"
-        options={{
-          headerShown: false,
-          title: "Profile",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name="profile"
-              color={color}
-              focused={focused}
-              icon={icons.profile}
-            />
-          ),
-        }}
-      />
+      {navList.map((item, index) => (
+        <Tabs.Screen
+          key={index}
+          name={item.name}
+          options={{
+            headerShown: false,
+            title: item.title,
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={item.title}
+                color={color}
+                icon={item.icon}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+      ))}
     </Tabs>
   );
 };
