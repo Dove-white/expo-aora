@@ -135,11 +135,3 @@ To run this project, set up an Appwrite backend with the following:
 1. **Database**: Create collections for `users` and `videos`.
 2. **Storage**: Create a storage bucket for file uploads (e.g., images and videos).
 3. **Environment Variables**: Configure the `.env` file with your Appwrite settings as shown above.
-
-## Contributing
-
-If you'd like to contribute to this project, feel free to fork the repository and submit a pull request!
-
-## License
-
-This project is open-source under the MIT License.
