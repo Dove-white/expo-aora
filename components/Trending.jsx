@@ -11,6 +11,7 @@ import * as Animatable from "react-native-animatable";
 
 const TrendingItem = ({ item, activeItem, index, isLoading }) => {
   const [play, setPlay] = useState(false);
+  const [showControls, setShowControls] = useState(false);
 
   const zoomIn = {
     0: {
@@ -31,11 +32,19 @@ const TrendingItem = ({ item, activeItem, index, isLoading }) => {
   };
 
   useEffect(() => {
-    // Ensure animation runs only if activeItem changes
     if (activeItem !== item?.$id) {
       setPlay(false);
     }
   }, [activeItem]);
+
+  const videoStyle = {
+    width: 148,
+    height: 236,
+    backgroundColor: "#000000",
+    borderRadius: 14,
+    marginTop: 32,
+    marginBottom: 32,
+  };
 
   return (
     <Animatable.View
@@ -45,25 +54,20 @@ const TrendingItem = ({ item, activeItem, index, isLoading }) => {
       className={`mr-5 mt-2`}
     >
       {play ? (
-        <Video
-          source={{ uri: item.video }}
-          resizeMode={ResizeMode.CONTAIN}
-          style={{
-            width: 148,
-            height: 236,
-            backgroundColor: "#000000",
-            borderRadius: 14,
-            marginTop: 32,
-            marginBottom: 32,
-          }}
-          // useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
-        />
+        <TouchableOpacity activeOpacity={0.7} onPress={() => setShowControls(true)}>
+          <Video
+            source={{ uri: item.video }}
+            resizeMode={ResizeMode.CONTAIN}
+            style={videoStyle}
+            useNativeControls={showControls}
+            shouldPlay
+            onPlaybackStatusUpdate={(status) => {
+              if (status.didJustFinish) {
+                setPlay(false);
+              }
+            }}
+          />
+        </TouchableOpacity>
       ) : (
         <TouchableOpacity
           className="relative"
