@@ -34,6 +34,7 @@ const TrendingItem = ({ item, activeItem, index, isLoading }) => {
   useEffect(() => {
     if (activeItem !== item?.$id) {
       setPlay(false);
+      setShowControls(false);
     }
   }, [activeItem]);
 
@@ -57,7 +58,7 @@ const TrendingItem = ({ item, activeItem, index, isLoading }) => {
         <TouchableOpacity activeOpacity={0.7} onPress={() => setShowControls(true)}>
           <Video
             source={{ uri: item.video }}
-            resizeMode={ResizeMode.CONTAIN}
+            resizeMode={showControls ? ResizeMode.CONTAIN : ResizeMode.COVER}
             style={videoStyle}
             useNativeControls={showControls}
             shouldPlay
